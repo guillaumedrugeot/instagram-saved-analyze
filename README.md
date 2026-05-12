@@ -1,6 +1,6 @@
 # Instagram Saved Posts → Markdown Notes Pipeline
 
-Daily automation that scrapes your Instagram saved pots/reels, transcribes them, and produces structured Markdown notes using an LLM API (Mistral, Gemini, or OpenAI).
+Daily automation that scrapes your Instagram saved post/reels, transcribes them, and produces structured Markdown notes using an LLM API (Mistral, Gemini, or OpenAI).
 
 ## How It Works
 
