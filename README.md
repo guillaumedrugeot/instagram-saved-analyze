@@ -95,7 +95,7 @@ instagram-saved-analyze/
 ├── run.sh                      # Pipeline entry point
 ├── scrape_reels.py             # Instagram API scraper (phase 1)
 ├── process_reel.py             # Per-reel prepare/triage/analyse (phases 2-4)
-├── llm.py                      # LLM abstraction (Mistral / Gemini / OpenAI)
+├── llm.py                      # LLM abstraction (Mistral / Gemini / OpenAI / Claude)
 ├── pipeline.py                 # Helpers: state management, markdown writer
 ├── config.env                  # Your settings (gitignored — copy from .example)
 ├── config.env.example          # Config template
