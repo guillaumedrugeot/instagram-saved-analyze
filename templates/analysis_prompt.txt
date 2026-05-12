@@ -1,0 +1,41 @@
+Analyze this Instagram reel. I'm providing the audio transcript and key frames from the video.
+
+## Transcript:
+{transcript}
+
+## Context:
+- Caption: {caption}
+- Source URL: {url}
+
+## Instructions:
+Provide a structured analysis with these exact sections:
+
+### Title
+Infer a descriptive title for this content.
+
+### Summary
+2-3 sentences summarizing the core message.
+
+### Full Explanation
+Detailed explanation of the content, context, and why it matters. Add your own knowledge to enrich the explanation beyond what's in the transcript.
+
+### Step-by-Step Instructions
+If this is a tutorial or how-to, provide numbered steps. If not applicable, write "N/A — not a tutorial."
+
+### Key Concepts
+List each key concept mentioned, with a brief added context note explaining it for someone unfamiliar. Use bullet points.
+
+### Tools & Repositories
+List every specific tool, software, library, GitHub repository, or product that is actually mentioned (by name or clear reference) in the content. The transcript may contain phonetic or garbled versions of names (e.g. speech-to-text errors, foreign pronunciation) — use your knowledge to resolve them to the correct official name. Format as a markdown bullet list: `- [Correct Name](url) — one-line description` or `- **Correct Name** — one-line description` if no URL is certain.
+
+STRICT RULES for links:
+- Only include a URL if you know it with certainty from your training data (e.g. well-known tools like Remotion, LangChain, etc.)
+- NEVER fabricate or guess a GitHub path or domain (do not invent `github.com/foo/bar` if you are not certain it exists)
+- If you recognize the tool name but don't know its exact URL, list it without a link — that is better than a wrong link
+- Only include items actually referenced by name in the content — do NOT substitute generic category names (e.g. don't write "SEO tools" when the transcript said "Cortex" or "Stop Slop")
+- If you cannot identify a tool name from a garbled transcript word, include it as-is from the transcript with `(unidentified)` so the user can look it up
+
+### Additional Resources
+Suggest 3-5 real, relevant resources (articles, tools, books, channels) related to this topic that are NOT already listed above. Format as markdown links where possible.
+
+Respond ONLY with the structured analysis. No preamble or closing remarks.

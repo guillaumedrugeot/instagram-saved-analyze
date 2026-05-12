@@ -1,0 +1,3 @@
+openai-whisper
+browser-cookie3
+requests

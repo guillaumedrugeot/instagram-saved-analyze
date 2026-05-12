@@ -1,0 +1,23 @@
+# Personal config (copy from config.env.example)
+config.env
+
+# Runtime state — personal browsing history
+state/seen_reels.json
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# macOS
+.DS_Store
+
+# Claude Code local settings
+.claude/
+
+# Tool artifacts
+yt-dlp/
+https:/
