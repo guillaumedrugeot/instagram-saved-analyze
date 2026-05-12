@@ -1,6 +1,6 @@
 # Instagram Saved Posts → Markdown Notes Pipeline
 
-Daily automation that scrapes your Instagram saved post/reels, transcribes them, and produces structured Markdown notes using an LLM API (Mistral, Gemini, or OpenAI).
+Daily automation that scrapes your Instagram saved posts and reels, transcribes them, and produces structured Markdown notes using an LLM API (Mistral, Gemini, OpenAI, or Claude).
 
 ## How It Works
 
@@ -19,7 +19,7 @@ Supports videos, photos, and carousels. Already-processed reels are tracked in `
 - macOS with [Homebrew](https://brew.sh)
 - A supported browser logged into Instagram: [Brave](https://brave.com), [Chrome](https://www.google.com/chrome/), or [Firefox](https://www.mozilla.org/firefox/) (for cookie extraction)
 - Python 3.10+
-- An LLM API key — Mistral (default), Gemini, or OpenAI
+- An LLM API key — Mistral (default), Gemini, OpenAI, or Claude (Anthropic)
 
 ## Setup
 
@@ -36,7 +36,7 @@ cp config.env.example config.env
 ```
 
 Edit `config.env` and fill in:
-- `LLM_PROVIDER` — `mistral`, `gemini`, or `openai`
+- `LLM_PROVIDER` — `mistral`, `gemini`, `openai`, or `claude`
 - `LLM_API_KEY` — your API key for the chosen provider
 - `INSTAGRAM_BROWSER` — browser to pull cookies from: `brave`, `chrome`, or `firefox` (default: `brave`)
 - `OUTPUT_DIR` — where to write `.md` files (default: `~/Documents/ReelNotes`)

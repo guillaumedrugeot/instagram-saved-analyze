@@ -3,9 +3,10 @@
 Unified LLM client. Reads LLM_PROVIDER and LLM_API_KEY from environment.
 
 Supported providers:
-  mistral  — mistralai SDK  (default model: mistral-small-latest)
+  mistral  — mistralai SDK    (default model: mistral-small-latest)
   gemini   — google-genai SDK (default model: gemini-2.0-flash)
   openai   — openai SDK       (default model: gpt-4o-mini)
+  claude   — anthropic SDK    (default model: claude-sonnet-4-6)
 
 Usage:
     from llm import generate
@@ -23,6 +24,7 @@ DEFAULTS = {
     "mistral": "mistral-small-latest",
     "gemini":  "gemini-2.0-flash",
     "openai":  "gpt-4o-mini",
+    "claude":  "claude-sonnet-4-6",
 }
 
 
@@ -103,10 +105,41 @@ def _call_openai(prompt: str, json_mode: bool, image_paths: list = None) -> str:
     return resp.choices[0].message.content
 
 
+def _call_claude(prompt: str, json_mode: bool, image_paths: list = None) -> str:
+    import base64
+    import anthropic
+    client = anthropic.Anthropic(api_key=_api_key())
+
+    system = "Respond with valid JSON only. No explanation, no markdown fences." if json_mode else anthropic.NOT_GIVEN
+
+    if image_paths:
+        content = []
+        for path in image_paths:
+            raw = open(path, "rb").read()
+            b64 = base64.b64encode(raw).decode()
+            suffix = str(path).rsplit(".", 1)[-1].lower()
+            mime = {"jpg": "image/jpeg", "jpeg": "image/jpeg",
+                    "png": "image/png", "webp": "image/webp",
+                    "gif": "image/gif"}.get(suffix, "image/jpeg")
+            content.append({"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}})
+        content.append({"type": "text", "text": prompt})
+    else:
+        content = prompt
+
+    resp = client.messages.create(
+        model=_model(),
+        max_tokens=4096,
+        system=system,
+        messages=[{"role": "user", "content": content}],
+    )
+    return resp.content[0].text
+
+
 _PROVIDERS = {
     "mistral": _call_mistral,
     "gemini":  _call_gemini,
     "openai":  _call_openai,
+    "claude":  _call_claude,
 }
 
 
@@ -132,8 +165,7 @@ def generate(prompt: str, json_mode: bool = False,
     provider = _provider()
     call_fn = _PROVIDERS[provider]
 
-    # Only mistral supports image_paths for now; others fall back to text-only
-    kwargs = {"image_paths": image_paths} if (image_paths and provider == "mistral") else {}
+    kwargs = {"image_paths": image_paths} if (image_paths and provider in ("mistral", "claude")) else {}
 
     for attempt in range(retries + 1):
         try:
